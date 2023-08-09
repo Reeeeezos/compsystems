@@ -1,0 +1,88 @@
+reeezos@reeezos:~$ docker -v
+Docker version 20.10.21, build 20.10.21-0ubuntu1~22.04.3
+
+reeezos@reeezos:~$ docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+719385e32844: Pull complete
+Digest: sha256:926fac19d22aa2d60f1a276b66a20eb765fbeea2db5dbdaafeb456ad8ce81598
+Status: Downloaded newer image for hello-world:latest
+docker.io/library/hello-world:latest
+
+reeezos@reeezos:~$ docker run hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+reeezos@reeezos:~$ docker images hello-world
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    9c7a54a9a43c   3 months ago   13.3kB
+reeezos@reeezos:~$
+reeezos@reeezos:~$ docker pull ellerbrock/alpine-bash-git
+Using default tag: latest
+latest: Pulling from ellerbrock/alpine-bash-git
+c87736221ed0: Pull complete
+eadf65686d00: Pull complete
+Digest: sha256:46262050f227c4515a501607873d760961ee32d92fa5b8cf9c89aca3c564d008
+Status: Downloaded newer image for ellerbrock/alpine-bash-git:latest
+docker.io/ellerbrock/alpine-bash-git:latest
+
+reeezos@reeezos:~$ docker run -it -d --name lab_1 --entrypoint /bin/bash  ellerbrock/alpine-bash-git
+f7b409062c927e635d7ffa2779ec1c94dd606503166a4f2a79ce5f0ccc6bf423
+
+reeezos@reeezos:~$ docker ps -a
+CONTAINER ID   IMAGE                        COMMAND       CREATED         STATUS         PORTS     NAMES
+f7b409062c92   ellerbrock/alpine-bash-git   "/bin/bash"   5 seconds ago   Up 4 seconds             lab_1
+
+reeezos@reeezos:~$ docker exec -it lab_1 /bin/bash
+
+bash-4.4$ ls /
+bin    dev    etc    home   lib    media  mnt    proc   root   run    sbin   srv    sys    tmp    usr    var
+
+bash-4.4$ whoami
+download
+
+bash-4.4$ git --version
+git version 2.18.1
+
+bash-4.4$ git clone https://github.com/pallets/flask.git
+Cloning into 'flask'...
+remote: Enumerating objects: 24112, done.
+remote: Counting objects: 100% (724/724), done.
+remote: Compressing objects: 100% (306/306), done.
+remote: Total 24112 (delta 401), reused 646 (delta 389), pack-reused 23388
+Receiving objects: 100% (24112/24112), 10.00 MiB | 11.08 MiB/s, done.
+Resolving deltas: 100% (16176/16176), done.
+
+bash-4.4$ ls
+flask
+
+bash-4.4$ exit
+exit
+
+reeezos@reeezos:~$ docker restart lab_1
+lab_1
+
+reeezos@reeezos:~$ docker exec -it lab_1 /bin/bash
+
+bash-4.4$ ls
+flask
+
+bash-4.4$
