@@ -1,0 +1,7 @@
+FROM python:3.8
+
+COPY kafkaconsumer.py .
+
+RUN pip install kafka-python
+
+CMD ["python", "-u", "kafkaconsumer.py"]
