@@ -1,0 +1,8 @@
+FROM python:3
+
+COPY filereader.py /
+COPY DockerBasics.docx /
+
+RUN pip install flask python-docx
+
+CMD ["python", "filereader.py"]
