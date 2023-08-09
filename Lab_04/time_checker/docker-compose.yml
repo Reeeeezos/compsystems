@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  writer:
+    image: timewriter
+    volumes:
+      - ./timestamps:/timestamps
+
+  consumer:
+    image: consumer
+    volumes:
+      - ./timestamps:/timestamps
